@@ -56,5 +56,10 @@ class RandomCoordinate(Nominatim):
             random_longitude = np.random.uniform(longitude[0], longitude[1])
             coordinate = self.query(random_latitude, random_longitude, reverse=True, zoom=20)
             if coordinate:
-                coordinate_list.append(coordinate.toJSON()[0])
+                point = coordinate.toJSON()[0]
+                address = point.get("address")
+                if address:
+                    country_code = address.get("country_code")
+                    if country_code == "ir":
+                        coordinate_list.append(point)
         return coordinate_list
