@@ -50,8 +50,9 @@ class RandomCoordinate(Nominatim):
         coordinate_list = []
         latitude = self.find_max_and_min_latitude()
         longitude = self.find_max_and_min_longitude()
+        quantity = self.quantity - 1
 
-        while len(coordinate_list) < self.quantity:
+        while len(coordinate_list) < quantity:
             random_latitude = np.random.uniform(latitude[0], latitude[1])
             random_longitude = np.random.uniform(longitude[0], longitude[1])
             coordinate = self.query(random_latitude, random_longitude, reverse=True, zoom=20)
